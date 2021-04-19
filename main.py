@@ -1,6 +1,6 @@
 #project
 from turtle import *
-speed(100)
+speed(400)
 left(90)
 up()
 backward(50)
@@ -27,9 +27,11 @@ def branch(a):
 #print(branch(100))
 exitonclick()
 
-a1 = [0] * 9999
-n = int(input('Введите количество колец '))
-a = a1[:n]
+
+
+a1 = [0]
+IN_NUM = int(input('Введите количество колец: '))
+a = a1 * IN_NUM
 b = []
 c = []
 
@@ -37,33 +39,40 @@ c = []
 def hanoy(point1,point2):
     print('Из стержня ',point1, ' в стержень ', point2)
 
-def hanoytower (n,point1,point2,temp):
-    if n == 0:
+
+def hanoytower (IN_NUM, point1, point2, temp):
+    if IN_NUM == 0:
         return
     #Из начальной точки во вспомогательную
-    hanoytower(n - 1, point1, temp, point2)
+    hanoytower(IN_NUM-1, point1, temp, point2)
     hanoy(point1,point2)
     #из Вспомогательной (temp) в конечную
-    hanoytower(n - 1, temp,point2,point1)
+    hanoytower(IN_NUM-1, temp, point2, point1)
 
 
-def print_hanoy(n,a,b,c):
-    if n == 0:
+def print_hanoy(IN_NUM, a, b, c):
+    if IN_NUM == 0:
+        print('Получилось:')
         return True
     a.pop(0)
     c.append(0)
-    print('A: ',a)
+    print('A: ', a)
     print('B: ', b)
     print('C: ', c)
     c.pop(0)
     b.append(0)
-    print_hanoy(n - 1, a, b, c)
-    if len(b) == n:
+    print_hanoy(IN_NUM-1, a, b, c)
+    if len(b) == IN_NUM:
         print('A: ', a)
         print('B: ', b)
         print('C: ', c)
 
 
-
-#print(hanoytower(n,'a','b','c'))
-#print(print_hanoy(n,a,b,c))
+def main():
+    print(hanoytower(IN_NUM,'a','b','c'))
+    print('Ход решения:')
+    print('A: ', a)
+    print('B: ', b)
+    print('C: ', c)
+    print(print_hanoy(IN_NUM,a,b,c))
+main()
